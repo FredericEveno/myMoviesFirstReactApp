@@ -1,0 +1,5 @@
+.Card {
+  font-size: calc(10px + 0.5vmin);
+  color:black;
+  margin-bottom: 20px;
+}
