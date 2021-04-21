@@ -1,3 +1,18 @@
 .Navbar {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.vCenter {
+  padding: 15% 0 15% 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.whishListItem {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

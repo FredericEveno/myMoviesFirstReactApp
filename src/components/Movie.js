@@ -8,24 +8,23 @@ function Movie(props) {
 
   // Déclaration des états
   const [likeMovie, setLikeMovie] = useState(false);
-  console.log('likeColor', likeColor);
   const [watchMovie, setWatchMovie] = useState(false);
-  console.log('watchMovie', watchMovie);
   const [countWatchMovie, setCountWatchMovie] = useState(props.globalViewsCount);
-  console.log('countWatchMovie', countWatchMovie);
   const [myRatingMovie, setMyRatingMovie] = useState(0);
-  console.log('myRatingMovie', myRatingMovie);
-  const [starIndex, setStarIndex] = useState(0);
-  console.log('starIndex', starIndex);
 
   // Gestion des clicks sur le like
   var likeClick = () => {
     setLikeMovie(!likeMovie);
+    // #3 Au clic sur le coeur, on renvoie l'état du bouton au parent
+    var onOff = !likeMovie; // On n'envoie pas directement likeMovie car cet état existe
+                            // sur chaque élément movie, on ne veut compter que les clics
+    props.handleClickAddMovieParent(onOff, props.movieName, props.movieImg);
   }
   var likeColor;
   if (likeMovie) {
     likeColor = {color: "#e74c3c"}
   } else {
+    props.handleClickAddMovieParent(0);
     likeColor = {color: "#000000"}
   }
 
@@ -73,11 +72,8 @@ function Movie(props) {
     return starsArray;
   }
   const myRatingStars = displayStars(myRatingMovie); // On calcule les étoiles pour mon vote
-  console.log('starsArray : ', myRatingStars);
-  const averageNote = (props.globalCountRating*props.globalRating + myRatingMovie)/(props.globalCountRating + 1);
-  console.log('averageNote : ', averageNote);
+  const averageNote = Math.ceil(props.globalCountRating*props.globalRating + myRatingMovie)/(props.globalCountRating + 1);
   const averageStars = displayStars(averageNote); // On calcule les étoiles pour la moyenne
-  console.log('averageStars : ', averageStars);
 
   // Movie app
   return (
