@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Nav, NavItem, NavLink, Col, Button, Popover, PopoverHeader, 
-          PopoverBody, ListGroup, ListGroupItem } from 'reactstrap';
+        PopoverBody, ListGroup, ListGroupItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import './Navbar.css'
@@ -22,16 +22,16 @@ function Navbar(props) {
 
   // Même chose avec un map :
   var whishArray = props.moviesWishlistParent; // On récup la liste depuis App
-  var whishList = whishArray.map( (e,i) => {
+  var whishList = whishArray.map( (film) => {
     // var whishlistItemClick = () => {
     //   props.handleClickAddMovieParent(false, e.name, e.img);
     // }
     return( <ListGroupItem className="whishListItem">
-              <img src={`../img/${e.img}`} style={{width:"25%"}}></img>
+              <img src={`../img/${film.img}`} style={{width:"25%"}}></img>
               <span> </span>
-              {e.name}
+              {film.name}
               <span> </span>
-              <FontAwesomeIcon icon={faTimesCircle} onClick={ ()=>props.handleClickAddMovieParent(false, e.name, e.img) }/>
+              <FontAwesomeIcon icon={faTimesCircle} onClick={ ()=>props.handleClickAddMovieParent(false, film.name, film.img) }/>
             </ListGroupItem> 
           );
   })

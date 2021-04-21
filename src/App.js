@@ -39,7 +39,7 @@ function App(props) {
       if (countNocount === false && moviesCount>0) {
         setMoviesCount(moviesCount-1);
         // Si le film n'est plus liké on filtre le nom dans le tableau moviesWishlist
-        setmoviesWishlist( moviesWishlist.filter( e => e.name !== likedMovieName ) );
+        setmoviesWishlist( moviesWishlist.filter( film => film.name !== likedMovieName ) );
       }
     }
   }
