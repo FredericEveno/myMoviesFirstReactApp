@@ -20,8 +20,9 @@ function Movie(props) {
                             // sur chaque élément movie, on ne veut compter que les clics
     props.handleClickAddMovieParent(onOff, props.movieName, props.movieImg);
   }
+
   var likeColor;
-  if (likeMovie) {
+  if (props.isInWishlist) {
     likeColor = {color: "#e74c3c"}
   } else {
     props.handleClickAddMovieParent(0);
@@ -67,7 +68,7 @@ function Movie(props) {
         starColor = {color: "#000000"};
       }
       let starIndex = i+1;
-      starsArray.push(<FontAwesomeIcon style={starColor} icon={faStar} onClick={ ()=>setMyRatingMovie(starIndex) } />);
+      starsArray.push(<FontAwesomeIcon key={i} style={starColor} icon={faStar} onClick={ ()=>setMyRatingMovie(starIndex) } />);
     }
     return starsArray;
   }
@@ -79,7 +80,7 @@ function Movie(props) {
   return (
     <Col xs="12" lg="6" xl="4">
       <Card className="Card">
-        <CardImg top width="100%" src={`../img/${props.movieImg}`} alt={props.movieName}/>
+        <CardImg top width="100%" src={props.movieImg} alt={props.movieName}/>
         <CardBody>
           <CardText>Like
             <span> </span>

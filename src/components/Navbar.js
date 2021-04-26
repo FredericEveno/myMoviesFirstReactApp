@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Nav, NavItem, NavLink, Col, Button, Popover, PopoverHeader, 
+import React from 'react';
+import { Nav, NavItem, NavLink, Col, Button, UncontrolledPopover, PopoverHeader, 
         PopoverBody, ListGroup, ListGroupItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
@@ -7,32 +7,19 @@ import './Navbar.css'
 
 function Navbar(props) {
 
-  const [popoverOpen, setPopoverOpen] = useState(false);
-  const toggle = () => setPopoverOpen(!popoverOpen);
-
-  // On construit la whish list
-  // var displayWhishlist = () => {
-  //   var whishArray = [];
-  //   for (var i=0; i<props.moviesNameParent.length; i++) {
-  //     whishArray.push(<ListGroupItem>{props.moviesWishlistParent[i]}</ListGroupItem>);
-  //   }
-  //   return whishArray;
-  // };
-  // const whishList = displayWhishlist();
-
-  // Même chose avec un map :
-  var whishArray = props.moviesWishlistParent; // On récup la liste depuis App
-  var whishList = whishArray.map( (film) => {
-    // var whishlistItemClick = () => {
+  // On construit la wish list
+  var wishArray = props.moviesWishlistParent; // On récup la liste depuis App
+  var wishList = wishArray.map( (film) => {
+    // var wishlistItemClick = () => {
     //   props.handleClickAddMovieParent(false, e.name, e.img);
     // }
-    return( <ListGroupItem className="whishListItem">
+    return( <ListGroupItem className="wishListItem" key={film.toString()}>
               <img src={`../img/${film.img}`} style={{width:"25%"}}></img>
               <span> </span>
               {film.name}
               <span> </span>
               <FontAwesomeIcon icon={faTimesCircle} onClick={ ()=>props.handleClickAddMovieParent(false, film.name, film.img) }/>
-            </ListGroupItem> 
+            </ListGroupItem>
           );
   })
 
@@ -51,15 +38,15 @@ function Navbar(props) {
         <NavItem>
         {/* On récupère le compteur de likes depuis l'App et on l'utilise pour l'afficher */}
         <NavLink>
-          <Button id="Popover" type="button">{props.moviesCountParent} liked film(s)</Button>
-          <Popover placement="bottom" isOpen={popoverOpen} target="Popover" toggle={toggle}>
-            <PopoverHeader>Whishlist</PopoverHeader>
+          <Button id="PopoverLegacy" type="button">{props.moviesCountParent} liked film(s)</Button>
+          <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy" >
+            <PopoverHeader>wishlist</PopoverHeader>
             <PopoverBody>
             <ListGroup>
-              {whishList}
+              {wishList}
             </ListGroup>
             </PopoverBody>
-          </Popover>
+          </UncontrolledPopover>
         </NavLink>
         </NavItem>
       </Nav>
